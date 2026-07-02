@@ -1,0 +1,43 @@
+from rich.console import Console
+Console().print("[bold]Banking Program".center(80,"-"))
+bank_dict = {}
+name = None
+bank_dict[name] = 0
+The_Path = input("Enter the Bank accounts folder's path : ")
+def showbalance() :
+    print(f"Your total balance is {bank_dict[name]}")
+def deposit() :
+    deposit = int(input("Please enter the required amount : "))
+    global Total
+    bank_dict[name] += deposit
+    Console().print("[green]Succsessfull Operation!")
+    myfile = open(r"{}\{}.txt".format(The_Path , name),"a")
+    myfile.write(f"The user has updated his balance with {deposit} deposit and his new balance is {bank_dict[name]}\n")
+def withdraw() :
+    withdraw = int(input("Please enter the required amount : "))
+    global Total
+    bank_dict[name] -= withdraw
+    Console().print("[green]Succsessfull Operation!")
+    myfile = open(r"{}\{}.txt".format(The_Path , name),"a")
+    myfile.write(f"The user has updated his balance with {withdraw} deposit and his new balance is {bank_dict[name]}\n")
+while True :
+    name = input("Enter your account name : ")
+    if name not in bank_dict:
+        bank_dict[name] = 0
+    Console().print("[bold]Choose an operation".center(80))
+    print("1.Show Balance")
+    print("2.Deposit")
+    print("3.Withdraw")
+    print("4.Exit")
+    choice = input("What is the operation ?").title()
+    if choice == "Show balance":
+        showbalance()
+    elif choice == "Deposit":
+        deposit()
+    elif choice == "Withdraw":
+        withdraw()    
+    elif choice == "Exit":
+        myfile = open(r"{}\{}.txt".format(The_Path ,name) ,"r")
+        myfile.close()
+        Console().print("[bold]Good Bye!")
+        break
